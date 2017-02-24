@@ -1,6 +1,7 @@
 
 # # R_useful.R
 # Collection of useful functions in R.
+# Edited: 2-24-17
 
 # #
 # pairPlot: pairwise correlation plots for ggplotters.
