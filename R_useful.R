@@ -1,15 +1,16 @@
-#R_useful
-DF<-data.frame(iris[,1:4])
-X<-DF
-#pairwiseScatter
-
+# # R_useful.R
+# Collection of useful functions in R.
 
 # #
 # pairPlot: pairwise correlation plots for ggplotters.
-# usage: pairPlot(dataframe with columns)
+# usage: pairPlot(X, mask, cor=TRUE)
+# X: dataframe with columns for each set of observations. 
+# mask: Optional Boolean DF of same dimensions as X used to mask observations based on specific criteria
+#
+# Will generate pairwise scatter of all columns with Correlation coef.
 # #
 
-pairPlot<-function(X,mask=NA, ggstuff=NULL,cor=TRUE){
+pairPlot<-function(X,mask=NA, ggstuff=NULL,cor=TRUE,al=0.7){
   if(!is.na(mask)){
     X[mask]<-NA
   }
@@ -24,10 +25,12 @@ pairPlot<-function(X,mask=NA, ggstuff=NULL,cor=TRUE){
   }
   stacks$Xvar<-factor(stacks$Xvar)
   stacks$Yvar<-factor(stacks$Yvar)
-  G<-ggplot(stacks)+geom_point(size=0.4,aes(Xval,Yval,color=corr))+facet_grid(Xvar~Yvar)+scale_color_gradient2(high = "red",low = 'blue',mid="darkgrey")
-  
+  if (cor=TRUE){
+    G<-ggplot(stacks)+geom_point(size=0.4,alpha = al,aes(Xval,Yval,color=corr))+facet_grid(Xvar~Yvar)+scale_color_gradient2(high = "red",low = 'blue',mid="darkgrey")
+  }
+  else{    
+    G<-ggplot(stacks)+geom_point(size=0.4,alpha = al,aes(Xval,Yval))+facet_grid(Xvar~Yvar)
+  }
   plot(G+ggstuff)
   return(stacks)
 }
-
-pairPlot(DF)
