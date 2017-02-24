@@ -1,3 +1,4 @@
+
 # # R_useful.R
 # Collection of useful functions in R.
 
@@ -37,3 +38,4 @@ pairPlot<-function(X,mask=NA, ggstuff=NULL,cor=TRUE,al=0.7){
   plot(G+ggstuff)
   return(stacks)
 }
+pairPlot(DF)
