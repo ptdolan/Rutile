@@ -25,7 +25,7 @@ pairPlot<-function(X,mask=NA, ggstuff=NULL,cor=TRUE,al=0.7){
   }
   stacks$Xvar<-factor(stacks$Xvar)
   stacks$Yvar<-factor(stacks$Yvar)
-  if (cor=TRUE){
+  if (cor==TRUE){
     G<-ggplot(stacks)+geom_point(size=0.4,alpha = al,aes(Xval,Yval,color=corr))+facet_grid(Xvar~Yvar)+scale_color_gradient2(high = "red",low = 'blue',mid="darkgrey")
   }
   else{    
