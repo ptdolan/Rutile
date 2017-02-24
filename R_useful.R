@@ -29,3 +29,5 @@ pairPlot<-function(X,mask=NA, ggstuff=NULL,cor=TRUE){
   plot(G+ggstuff)
   return(stacks)
 }
+
+pairPlot(DF)
