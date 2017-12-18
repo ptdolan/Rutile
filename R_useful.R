@@ -20,11 +20,13 @@ pairPlot<-function(X,mask=NA, ggstuff=NULL,cor=TRUE,al=0.7){
   names<-colnames(X)
   for (i in 1:(ncol(X)-1)){
     for (j in (i+1):ncol(X)){
+<<<<<<< HEAD
       #print(i)
       #print(j)
+=======
+>>>>>>> origin/master
       pair=na.omit(X[,c(i,j)])
-      
-      block=data.frame(Yval=pair[,1],Xval=pair[,2],Xvar=names[i],Yvar=names[j],corr=corr(pair))
+      block=data.frame(Yval=pair[,1],Xval=pair[,2],Xvar=names[i],Yvar=names[j],corr=corr(X[,c(i,j)]))
       stacks<-rbind(stacks,block)
     }
   }
