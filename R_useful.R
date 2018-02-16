@@ -20,11 +20,8 @@ pairPlot<-function(X,mask=NA, ggstuff=NULL,cor=TRUE,al=0.7){
   names<-colnames(X)
   for (i in 1:(ncol(X)-1)){
     for (j in (i+1):ncol(X)){
-<<<<<<< HEAD
       #print(i)
       #print(j)
-=======
->>>>>>> origin/master
       pair=na.omit(X[,c(i,j)])
       block=data.frame(Yval=pair[,1],Xval=pair[,2],Xvar=names[i],Yvar=names[j],corr=corr(X[,c(i,j)]))
       stacks<-rbind(stacks,block)
@@ -41,4 +38,9 @@ pairPlot<-function(X,mask=NA, ggstuff=NULL,cor=TRUE,al=0.7){
   plot(G+ggstuff)
   return(stacks)
 }
-pairPlot(DF)
+
+colGen<-function(z){#https://stackoverflow.com/questions/39117827/colorful-plot-using-persp
+  z.facet.center <- (z[-1, -1] + z[-1, -ncol(z)] + z[-nrow(z), -1] + z[-nrow(z), -ncol(z)])/4
+  z.facet.range<-cut(z.facet.center, 100)
+  return(z.facet.range)
+}
