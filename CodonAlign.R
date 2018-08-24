@@ -3,7 +3,7 @@
 # author: "PTDolan"
 # date: "8/23/2018"
 # description: Codon-align CDS sequences in fasta format. 
-# usage: 
+# usage: "RScript CodonAlign.R <myFasta.fa>"
 # ---
 
 # UnComment for Installation
