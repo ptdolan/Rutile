@@ -132,3 +132,31 @@ PHNanalysis<-function(input,ID,COLUMNS){
   dev.off()
   return(PHN)
 }
+
+for (ID in as.character(IDlist[,1])){
+  #get data
+  data<-getGEO(GEO = ID)
+  COLUMNS<- GEOquery::Columns(data)
+  TABLE<- GEOquery::Table(data)
+  
+  #generate data.table
+  input<-generateTable(data,COLUMNS,TABLE)
+  N=ncol(input)
+  #plot sample structure
+  #plotPopStructure(input,COLUMNS,N)
+  
+  #compute Clusters
+  cinput<-clusterGenes(input)
+  #plotClusters(cinput,COLUMNS,ID,N)
+  allData<-collectData(cinput,allData,COLUMNS,ID)
+  
+  PHN<-PHNanalysis(input,ID,COLUMNS)
+  cPHN<-clusterGenes(PHN[,-'cluster'])
+  plotClusters(cPHN,COLUMNS,ID,N)
+  D<-dist(as.matrix(cPHN[,-c("ID_REF","IDENTIFIER","cluster")],colnames=colnames(cPHN)[-c(1:2)],row.names=cPHN$IDENTIFIER))
+  scaleD<-cmdscale(D,)
+  plot(scaleD,col=brewer.pal("Set1",n = 4)[cPHN$cluster])
+  
+}
+
+
